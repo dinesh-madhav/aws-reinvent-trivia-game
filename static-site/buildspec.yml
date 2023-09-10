@@ -7,10 +7,11 @@ env:
 phases:
   install:
     runtime-versions:
-      nodejs: 20.5.0
+      nodejs: latest
     commands:
       # Install dependencies for both site content and for CDK
-      - npm install -g npm@latest
+      - n install 20
+      - node --version
       - npm install -g aws-cdk
       - cd static-site/app
       - npm ci
