@@ -57,7 +57,7 @@ export class TriviaGameContainersCfnPipeline extends Construct {
         const sourceAction = new actions.CodeStarConnectionsSourceAction({
             actionName: 'GitHubSource',
             owner: 'dinesh-madhav',
-            repo: 'aws-nike-workshop-game',
+            repo: 'aws-reinvent-trivia-game',
             connectionArn: githubConnection,
             output: sourceOutput
         });
