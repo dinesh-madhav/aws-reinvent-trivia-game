@@ -6,7 +6,7 @@ The trivia game application can use Amazon CloudWatch Synthetics to continuously
 
 Create an SNS topic for notifications about the canary alarms.  An email address or to a [chat bot](https://docs.aws.amazon.com/chatbot/latest/adminguide/setting-up.html) can then be subscribed to the topic to receive notifications about canary alarms.
 ```
-aws sns create-topic --name nike-workshop-notifications --region us-west-2
+aws sns create-topic --name nike-workshop-notifications --region us-east-1
 ```
 
 ## Customize
@@ -38,7 +38,7 @@ Deploy the resources for running a continuous monitoring canary against the test
 
 ```
 aws cloudformation deploy \
-  --region us-west-2 \
+  --region us-east-1 \
   --template-file template.yaml \
   --stack-name TriviaGameCanariesTest \
   --capabilities CAPABILITY_NAMED_IAM \
@@ -52,7 +52,7 @@ Deploy the resources for running a continuous monitoring canary against the prod
 
 ```
 aws cloudformation deploy \
-  --region us-west-2 \
+  --region us-east-1 \
   --template-file template.yaml \
   --stack-name TriviaGameCanariesProd \
   --capabilities CAPABILITY_NAMED_IAM \

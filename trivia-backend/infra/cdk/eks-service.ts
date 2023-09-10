@@ -218,7 +218,7 @@ new TriviaBackendStack(app, 'TriviaBackendProd', {
   domainName: 'api.nike-workshop.com',
   // NOTE: `domainZone` must already exist in Route 53.
   domainZone: 'nike-workshop.com',
-  env: {account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2'},
+  env: {account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1'},
   tags: {
       project: "nike-workshop"
   },

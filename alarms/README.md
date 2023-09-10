@@ -6,7 +6,7 @@ Assuming you have set up all the other components for the trivia game already (i
 
 First, create an SNS topic for notifications about the composite alarms.
 ```
-aws sns create-topic --name nike-workshop-notifications --region us-west-2
+aws sns create-topic --name nike-workshop-notifications --region us-east-1
 ```
 
 To subscribe an email address to receive notifications about alarms, follow the instructions for subscribing via email to the SNS topic on [this page](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/US_SetupSNS.html#set-up-sns-topic-cli).
@@ -17,7 +17,7 @@ To create a chat bot that notifies you about alarms in Slack or Chime, follow th
 
 ```
 aws cloudformation deploy \
-  --region us-west-2 \
+  --region us-east-1 \
   --template-file template.yaml \
   --stack-name TriviaGameCompositeAlarmTest \
   --parameter-overrides Stage=Test \
@@ -28,7 +28,7 @@ aws cloudformation deploy \
 
 ```
 aws cloudformation deploy \
-  --region us-west-2 \
+  --region us-east-1 \
   --template-file template.yaml \
   --stack-name TriviaGameCompositeAlarmProd \
   --parameter-overrides Stage=Prod \

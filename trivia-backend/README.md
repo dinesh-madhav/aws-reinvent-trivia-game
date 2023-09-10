@@ -7,17 +7,17 @@ The trivia backend is a REST API that serves questions and answers.  A running e
 Create an ECR repository for both the base Docker image and the application image.
 
 ```
-aws ecr create-repository --region us-west-2 --tags Key=project,Value=nike-workshop --repository-name nike-workshop-backend
+aws ecr create-repository --region us-east-1 --tags Key=project,Value=nike-workshop --repository-name nike-workshop-backend
 
-aws ecr create-repository --region us-west-2 --tags Key=project,Value=nike-workshop --repository-name nike-workshop-backend-base
+aws ecr create-repository --region us-east-1 --tags Key=project,Value=nike-workshop --repository-name nike-workshop-backend-base
 ```
 
 Create AWS Certificate Manager certificates for the 'api' and 'test-api' subdomains, then put the unique ARN of those certificates in an AWS Systems Manager Parameter Store parameter.
 
 ```
-aws ssm put-parameter --region us-west-2 --tags Key=project,Value=nike-workshop --name CertificateArn-api.nike-workshop.com --type String --value arn:aws:acm:...
+aws ssm put-parameter --region us-east-1 --tags Key=project,Value=nike-workshop --name CertificateArn-api.nike-workshop.com --type String --value arn:aws:acm:...
 
-aws ssm put-parameter --region us-west-2 --tags Key=project,Value=nike-workshop --name CertificateArn-test-api.nike-workshop.com --type String --value arn:aws:acm:...
+aws ssm put-parameter --region us-east-1 --tags Key=project,Value=nike-workshop --name CertificateArn-test-api.nike-workshop.com --type String --value arn:aws:acm:...
 ```
 
 ## Customize
@@ -71,20 +71,20 @@ Follow the instructions in the [canaries](../canaries) folder to deploy syntheti
 AWS_ACCOUNT_ID=`aws sts get-caller-identity --query Account --output text`
 
 aws cloudformation update-stack \
-   --region us-west-2 \
+   --region us-east-1 \
    --stack-name TriviaBackendTest \
    --use-previous-template \
    --parameters ParameterKey=CertArnParameterParameter,UsePreviousValue=true \
    --capabilities CAPABILITY_IAM \
-   --rollback-configuration "RollbackTriggers=[{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Unhealthy-Hosts,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Http-500,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:Synthetics-Alarm-trivia-game-test,Type=AWS::CloudWatch::Alarm}]"
+   --rollback-configuration "RollbackTriggers=[{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Unhealthy-Hosts,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Http-500,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:Synthetics-Alarm-trivia-game-test,Type=AWS::CloudWatch::Alarm}]"
 
 aws cloudformation update-stack \
-   --region us-west-2 \
+   --region us-east-1 \
    --stack-name TriviaBackendProd \
    --use-previous-template \
    --parameters ParameterKey=CertArnParameterParameter,UsePreviousValue=true \
    --capabilities CAPABILITY_IAM \
-   --rollback-configuration "RollbackTriggers=[{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Unhealthy-Hosts,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Http-500,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:Synthetics-Alarm-trivia-game-prod,Type=AWS::CloudWatch::Alarm}]"
+   --rollback-configuration "RollbackTriggers=[{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Unhealthy-Hosts,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Http-500,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:Synthetics-Alarm-trivia-game-prod,Type=AWS::CloudWatch::Alarm}]"
 ```
 
 ### ECS on Fargate (task set deployments)
@@ -120,7 +120,7 @@ aws cloudformation package \
   --s3-bucket <S3 bucket for storing the Lambda function code>
 
 aws cloudformation deploy \
-  --region us-west-2 \
+  --region us-east-1 \
   --template-file packaged-template.yaml \
   --stack-name TriviaBackendHooksTest \
   --tags project=nike-workshop \
@@ -129,7 +129,7 @@ aws cloudformation deploy \
   --parameter-overrides TriviaBackendDomain=api-test.nike-workshop.com
 
 aws cloudformation deploy \
-  --region us-west-2 \
+  --region us-east-1 \
   --template-file packaged-template.yaml \
   --stack-name TriviaBackendHooksProd \
   --tags project=nike-workshop \
@@ -159,20 +159,20 @@ Follow the instructions in the [canaries](../canaries) folder to deploy syntheti
 AWS_ACCOUNT_ID=`aws sts get-caller-identity --query Account --output text`
 
 aws cloudformation update-stack \
-   --region us-west-2 \
+   --region us-east-1 \
    --stack-name TriviaBackendTest \
    --use-previous-template \
    --parameters ParameterKey=CertArnParameterParameter,UsePreviousValue=true \
    --capabilities CAPABILITY_IAM \
-   --rollback-configuration "RollbackTriggers=[{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Unhealthy-Hosts-Blue,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Http-500-Blue,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Unhealthy-Hosts-Green,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Http-500-Green,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:Synthetics-Alarm-trivia-game-test,Type=AWS::CloudWatch::Alarm}]"
+   --rollback-configuration "RollbackTriggers=[{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Unhealthy-Hosts-Blue,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Http-500-Blue,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Unhealthy-Hosts-Green,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Http-500-Green,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:Synthetics-Alarm-trivia-game-test,Type=AWS::CloudWatch::Alarm}]"
 
 aws cloudformation update-stack \
-   --region us-west-2 \
+   --region us-east-1 \
    --stack-name TriviaBackendProd \
    --use-previous-template \
    --parameters ParameterKey=CertArnParameterParameter,UsePreviousValue=true \
    --capabilities CAPABILITY_IAM \
-   --rollback-configuration "RollbackTriggers=[{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Unhealthy-Hosts-Blue,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Http-500-Blue,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Unhealthy-Hosts-Green,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Http-500-Green,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:Synthetics-Alarm-trivia-game-prod,Type=AWS::CloudWatch::Alarm}]"
+   --rollback-configuration "RollbackTriggers=[{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Unhealthy-Hosts-Blue,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Http-500-Blue,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Unhealthy-Hosts-Green,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Http-500-Green,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:Synthetics-Alarm-trivia-game-prod,Type=AWS::CloudWatch::Alarm}]"
 ```
 
 ### ECS on Fargate (CodeDeploy blue-green deployments, outside of CloudFormation)

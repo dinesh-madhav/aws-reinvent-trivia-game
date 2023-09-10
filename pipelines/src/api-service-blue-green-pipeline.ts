@@ -22,7 +22,7 @@ class TriviaGameBackendBlueGreenPipelineStack extends Stack {
 
 const app = new App();
 new TriviaGameBackendBlueGreenPipelineStack(app, 'TriviaGameBackendBlueGreenPipeline', {
-    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2' },
+    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1' },
     tags: {
         project: 'nike-workshop'
     }

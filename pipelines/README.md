@@ -18,7 +18,7 @@ In [src](src/) directory:
 
 Create an SNS topic for notifications about pipeline execution failures.  An email address or a [chat bot](https://docs.aws.amazon.com/chatbot/latest/adminguide/setting-up.html) can be subscribed to the topic to receive notifications about pipeline failures.
 ```
-aws sns create-topic --name nike-workshop-notifications --tags Key=project,Value=nike-workshop --region us-west-2
+aws sns create-topic --name nike-workshop-notifications --tags Key=project,Value=nike-workshop --region us-east-1
 ```
 
 Follow the [CodeStar Notifications user guide](https://docs.aws.amazon.com/codestar-notifications/latest/userguide/set-up-sns.html) to configure the SNS topic to be able to receive notifications about pipeline failures.
@@ -39,7 +39,7 @@ Deploy common resources used by all the pipelines:
 cdk deploy --app 'node src/pipelines-bootstrap.js'
 ```
 
-Activate the CodeStar Connections connection created by the previous step.  Go to the [CodeStar Connections console](https://console.aws.amazon.com/codesuite/settings/connections?region=us-west-2), select the `nike-workshop-repo` connection, and click "Update pending connection".  Then follow the prompts to connect your GitHub account and repos to AWS.  When finished, the `nike-workshop-repo` connection should have the "Available" status.
+Activate the CodeStar Connections connection created by the previous step.  Go to the [CodeStar Connections console](https://console.aws.amazon.com/codesuite/settings/connections?region=us-east-1), select the `nike-workshop-repo` connection, and click "Update pending connection".  Then follow the prompts to connect your GitHub account and repos to AWS.  When finished, the `nike-workshop-repo` connection should have the "Available" status.
 
 Then, deploy the individual pipeline stacks:
 

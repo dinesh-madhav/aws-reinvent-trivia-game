@@ -38,7 +38,7 @@ const app = new App();
 new TriviaGameInfrastructureStack(app, 'TriviaGameStaticSiteInfraTest', {
     domainName: 'nike-workshop.com',
     siteSubDomain: 'test',
-    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2' },
+    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1' },
     tags: {
         project: "nike-workshop"
     }
@@ -46,14 +46,14 @@ new TriviaGameInfrastructureStack(app, 'TriviaGameStaticSiteInfraTest', {
 new TriviaGameInfrastructureStack(app, 'TriviaGameStaticSiteInfraProd', {
     domainName: 'nike-workshop.com',
     siteSubDomain: 'www',
-    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2' },
+    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1' },
     tags: {
         project: "nike-workshop"
     }
 });
 new TriviaGameRootDomainStack(app, 'TriviaGameRootDomainRedirectProd', {
     domainName: 'nike-workshop.com',
-    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2' },
+    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1' },
     tags: {
         project: "nike-workshop"
     }

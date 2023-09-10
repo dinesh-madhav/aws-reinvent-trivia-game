@@ -346,7 +346,7 @@ new TriviaBackendStack(app, 'TriviaBackendTest', {
   domainName: 'api-test.nike-workshop.com',
   domainZone: 'nike-workshop.com',
   deploymentHooksStack: 'TriviaBackendHooksTest',
-  env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2' },
+  env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1' },
   tags: {
       project: 'nike-workshop'
   }
@@ -355,7 +355,7 @@ new TriviaBackendStack(app, 'TriviaBackendProd', {
   domainName: 'api.nike-workshop.com',
   domainZone: 'nike-workshop.com',
   deploymentHooksStack: 'TriviaBackendHooksProd',
-  env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2' },
+  env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1' },
   tags: {
       project: 'nike-workshop'
   }

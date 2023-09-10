@@ -19,7 +19,7 @@ class TriviaGameLifecycleHooksPipelineStack extends Stack {
 
 const app = new App();
 new TriviaGameLifecycleHooksPipelineStack(app, 'TriviaGameLifecycleHooksPipeline', {
-    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2' },
+    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1' },
     tags: {
         project: "nike-workshop"
     }
