@@ -94,7 +94,7 @@ export class TriviaGameCfnPipeline extends Construct {
                 },
             }),
             environment: {
-                buildImage: codebuild.LinuxBuildImage.fromCodeBuildImageId('aws/codebuild/amazonlinux2-x86_64-standard:4.0'),
+                buildImage: codebuild.LinuxBuildImage.fromCodeBuildImageId('aws/codebuild/amazonlinux2-x86_64-standard:5.0'),
             },
         });
         pipelineProject.addToRolePolicy(
@@ -128,7 +128,7 @@ export class TriviaGameCfnPipeline extends Construct {
         const buildProject = new codebuild.PipelineProject(this, 'BuildProject', {
             buildSpec: codebuild.BuildSpec.fromSourceFilename(props.directory + '/buildspec.yml'),
             environment: {
-              buildImage: codebuild.LinuxBuildImage.fromCodeBuildImageId('aws/codebuild/amazonlinux2-x86_64-standard:4.0'),
+              buildImage: codebuild.LinuxBuildImage.fromCodeBuildImageId('aws/codebuild/amazonlinux2-x86_64-standard:5.0'),
               environmentVariables: {
                 'ARTIFACTS_BUCKET': {
                     value: pipeline.artifactBucket.bucketName
