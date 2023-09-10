@@ -31,7 +31,7 @@ export class TriviaGameCfnPipeline extends Construct {
         super(parent, name);
 
         const pipeline = new codepipeline.Pipeline(this, "Pipeline", {
-            pipelineName: "reinvent-trivia-game-" + props.pipelineName,
+            pipelineName: "nike-workshop-game-" + props.pipelineName,
             restartExecutionOnUpdate: true,
         });
         this.pipeline = pipeline;
@@ -46,7 +46,7 @@ export class TriviaGameCfnPipeline extends Construct {
                     targetType: 'SNS',
                     targetAddress: Stack.of(this).formatArn({
                         service: 'sns',
-                        resource: 'reinvent-trivia-notifications'
+                        resource: 'nike-workshop-notifications'
                     }),
                 }
             ]
@@ -57,8 +57,8 @@ export class TriviaGameCfnPipeline extends Construct {
         const sourceOutput = new codepipeline.Artifact('SourceArtifact');
         const sourceAction = new actions.CodeStarConnectionsSourceAction({
             actionName: 'GitHubSource',
-            owner: 'aws-samples',
-            repo: 'aws-reinvent-trivia-game',
+            owner: 'dinesh-madhav',
+            repo: 'aws-nike-workshop-game',
             connectionArn: githubConnection,
             output: sourceOutput
         });

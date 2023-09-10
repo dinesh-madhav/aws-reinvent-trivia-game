@@ -10,7 +10,7 @@ Parameters:
 
   NotificationsTopic:
     Type: String
-    Default: reinvent-trivia-notifications
+    Default: nike-workshop-notifications
 
 Mappings:
   StageLowerCaseMap:

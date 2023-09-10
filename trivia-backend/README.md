@@ -1,28 +1,28 @@
 # Trivia Backend API Service
 
-The trivia backend is a REST API that serves questions and answers.  A running example can be seen on [api.reinvent-trivia.com](https://api.reinvent-trivia.com/api/docs/).
+The trivia backend is a REST API that serves questions and answers.  A running example can be seen on [api.nike-workshop.com](https://api.nike-workshop.com/api/docs/).
 
 ## Prep
 
 Create an ECR repository for both the base Docker image and the application image.
 
 ```
-aws ecr create-repository --region us-east-1 --tags Key=project,Value=reinvent-trivia --repository-name reinvent-trivia-backend
+aws ecr create-repository --region us-west-2 --tags Key=project,Value=nike-workshop --repository-name nike-workshop-backend
 
-aws ecr create-repository --region us-east-1 --tags Key=project,Value=reinvent-trivia --repository-name reinvent-trivia-backend-base
+aws ecr create-repository --region us-west-2 --tags Key=project,Value=nike-workshop --repository-name nike-workshop-backend-base
 ```
 
 Create AWS Certificate Manager certificates for the 'api' and 'test-api' subdomains, then put the unique ARN of those certificates in an AWS Systems Manager Parameter Store parameter.
 
 ```
-aws ssm put-parameter --region us-east-1 --tags Key=project,Value=reinvent-trivia --name CertificateArn-api.reinvent-trivia.com --type String --value arn:aws:acm:...
+aws ssm put-parameter --region us-west-2 --tags Key=project,Value=nike-workshop --name CertificateArn-api.nike-workshop.com --type String --value arn:aws:acm:...
 
-aws ssm put-parameter --region us-east-1 --tags Key=project,Value=reinvent-trivia --name CertificateArn-test-api.reinvent-trivia.com --type String --value arn:aws:acm:...
+aws ssm put-parameter --region us-west-2 --tags Key=project,Value=nike-workshop --name CertificateArn-test-api.nike-workshop.com --type String --value arn:aws:acm:...
 ```
 
 ## Customize
 
-Replace all references to 'reinvent-trivia.com' with your own domain name. This sample assumes that you already registered your domain name and created a [Route53 hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/AboutHZWorkingWith.html) for the domain name in your AWS account.
+Replace all references to 'nike-workshop.com' with your own domain name. This sample assumes that you already registered your domain name and created a [Route53 hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/AboutHZWorkingWith.html) for the domain name in your AWS account.
 
 ## Build Docker images
 
@@ -31,9 +31,9 @@ The base image Dockerfile can be found in the [base](base/) folder.  In the exam
 Locally, it can be built with the following commands.  Follow the "push commands" instructions in the ECR console to push them into the ECR repository.
 
 ```
-docker build -t reinvent-trivia-backend-base:release base/
+docker build -t nike-workshop-backend-base:release base/
 
-docker build -t reinvent-trivia-backend:latest .
+docker build -t nike-workshop-backend:latest .
 ```
 
 ## Provision using infrastructure as code
@@ -71,20 +71,20 @@ Follow the instructions in the [canaries](../canaries) folder to deploy syntheti
 AWS_ACCOUNT_ID=`aws sts get-caller-identity --query Account --output text`
 
 aws cloudformation update-stack \
-   --region us-east-1 \
+   --region us-west-2 \
    --stack-name TriviaBackendTest \
    --use-previous-template \
    --parameters ParameterKey=CertArnParameterParameter,UsePreviousValue=true \
    --capabilities CAPABILITY_IAM \
-   --rollback-configuration "RollbackTriggers=[{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Unhealthy-Hosts,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Http-500,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:Synthetics-Alarm-trivia-game-test,Type=AWS::CloudWatch::Alarm}]"
+   --rollback-configuration "RollbackTriggers=[{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Unhealthy-Hosts,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Http-500,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:Synthetics-Alarm-trivia-game-test,Type=AWS::CloudWatch::Alarm}]"
 
 aws cloudformation update-stack \
-   --region us-east-1 \
+   --region us-west-2 \
    --stack-name TriviaBackendProd \
    --use-previous-template \
    --parameters ParameterKey=CertArnParameterParameter,UsePreviousValue=true \
    --capabilities CAPABILITY_IAM \
-   --rollback-configuration "RollbackTriggers=[{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Unhealthy-Hosts,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Http-500,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:Synthetics-Alarm-trivia-game-prod,Type=AWS::CloudWatch::Alarm}]"
+   --rollback-configuration "RollbackTriggers=[{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Unhealthy-Hosts,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Http-500,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:Synthetics-Alarm-trivia-game-prod,Type=AWS::CloudWatch::Alarm}]"
 ```
 
 ### ECS on Fargate (task set deployments)
@@ -120,22 +120,22 @@ aws cloudformation package \
   --s3-bucket <S3 bucket for storing the Lambda function code>
 
 aws cloudformation deploy \
-  --region us-east-1 \
+  --region us-west-2 \
   --template-file packaged-template.yaml \
   --stack-name TriviaBackendHooksTest \
-  --tags project=reinvent-trivia \
+  --tags project=nike-workshop \
   --capabilities CAPABILITY_NAMED_IAM \
-  --tags project=reinvent-trivia \
-  --parameter-overrides TriviaBackendDomain=api-test.reinvent-trivia.com
+  --tags project=nike-workshop \
+  --parameter-overrides TriviaBackendDomain=api-test.nike-workshop.com
 
 aws cloudformation deploy \
-  --region us-east-1 \
+  --region us-west-2 \
   --template-file packaged-template.yaml \
   --stack-name TriviaBackendHooksProd \
-  --tags project=reinvent-trivia \
+  --tags project=nike-workshop \
   --capabilities CAPABILITY_NAMED_IAM \
-  --tags project=reinvent-trivia \
-  --parameter-overrides TriviaBackendDomain=api.reinvent-trivia.com
+  --tags project=nike-workshop \
+  --parameter-overrides TriviaBackendDomain=api.nike-workshop.com
 ```
 
 Then, build and deploy the backend service stacks using the AWS CDK from the `infra/cdk` folder:
@@ -159,20 +159,20 @@ Follow the instructions in the [canaries](../canaries) folder to deploy syntheti
 AWS_ACCOUNT_ID=`aws sts get-caller-identity --query Account --output text`
 
 aws cloudformation update-stack \
-   --region us-east-1 \
+   --region us-west-2 \
    --stack-name TriviaBackendTest \
    --use-previous-template \
    --parameters ParameterKey=CertArnParameterParameter,UsePreviousValue=true \
    --capabilities CAPABILITY_IAM \
-   --rollback-configuration "RollbackTriggers=[{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Unhealthy-Hosts-Blue,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Http-500-Blue,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Unhealthy-Hosts-Green,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Http-500-Green,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:Synthetics-Alarm-trivia-game-test,Type=AWS::CloudWatch::Alarm}]"
+   --rollback-configuration "RollbackTriggers=[{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Unhealthy-Hosts-Blue,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Http-500-Blue,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Unhealthy-Hosts-Green,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendTest-Http-500-Green,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:Synthetics-Alarm-trivia-game-test,Type=AWS::CloudWatch::Alarm}]"
 
 aws cloudformation update-stack \
-   --region us-east-1 \
+   --region us-west-2 \
    --stack-name TriviaBackendProd \
    --use-previous-template \
    --parameters ParameterKey=CertArnParameterParameter,UsePreviousValue=true \
    --capabilities CAPABILITY_IAM \
-   --rollback-configuration "RollbackTriggers=[{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Unhealthy-Hosts-Blue,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Http-500-Blue,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Unhealthy-Hosts-Green,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Http-500-Green,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-east-1:$AWS_ACCOUNT_ID:alarm:Synthetics-Alarm-trivia-game-prod,Type=AWS::CloudWatch::Alarm}]"
+   --rollback-configuration "RollbackTriggers=[{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Unhealthy-Hosts-Blue,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Http-500-Blue,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Unhealthy-Hosts-Green,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:TriviaBackendProd-Http-500-Green,Type=AWS::CloudWatch::Alarm},{Arn=arn:aws:cloudwatch:us-west-2:$AWS_ACCOUNT_ID:alarm:Synthetics-Alarm-trivia-game-prod,Type=AWS::CloudWatch::Alarm}]"
 ```
 
 ### ECS on Fargate (CodeDeploy blue-green deployments, outside of CloudFormation)
@@ -231,7 +231,7 @@ Your first troubleshooting step should be to rollout a "new" deployment using `k
 
 ```
 kubectl rollout restart -n kube-system deployment coredns
-kubectl rollout restart -n reinvent-trivia deployment api
+kubectl rollout restart -n nike-workshop deployment api
 ... etc ...
 ```
 

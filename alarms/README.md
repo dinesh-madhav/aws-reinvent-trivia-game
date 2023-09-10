@@ -6,7 +6,7 @@ Assuming you have set up all the other components for the trivia game already (i
 
 First, create an SNS topic for notifications about the composite alarms.
 ```
-aws sns create-topic --name reinvent-trivia-notifications --region us-east-1
+aws sns create-topic --name nike-workshop-notifications --region us-west-2
 ```
 
 To subscribe an email address to receive notifications about alarms, follow the instructions for subscribing via email to the SNS topic on [this page](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/US_SetupSNS.html#set-up-sns-topic-cli).
@@ -17,20 +17,20 @@ To create a chat bot that notifies you about alarms in Slack or Chime, follow th
 
 ```
 aws cloudformation deploy \
-  --region us-east-1 \
+  --region us-west-2 \
   --template-file template.yaml \
   --stack-name TriviaGameCompositeAlarmTest \
   --parameter-overrides Stage=Test \
-  --tags project=reinvent-trivia
+  --tags project=nike-workshop
 ```
 
 ## Create the prod endpoint composite alarm
 
 ```
 aws cloudformation deploy \
-  --region us-east-1 \
+  --region us-west-2 \
   --template-file template.yaml \
   --stack-name TriviaGameCompositeAlarmProd \
   --parameter-overrides Stage=Prod \
-  --tags project=reinvent-trivia
+  --tags project=nike-workshop
 ```

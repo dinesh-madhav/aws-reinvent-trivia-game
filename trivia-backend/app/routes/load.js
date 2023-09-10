@@ -16,7 +16,7 @@ const router = express.Router();
  *     }
  *
  * @apiExample {curl} Example usage:
- *     curl -i https://api.reinvent-trivia.com/api/load
+ *     curl -i https://api.nike-workshop.com/api/load
  */
 router.get('/', function(req, res, next) {
   var now = new Date().getTime();

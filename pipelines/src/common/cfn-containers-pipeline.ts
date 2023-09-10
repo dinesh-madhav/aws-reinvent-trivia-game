@@ -27,7 +27,7 @@ export class TriviaGameContainersCfnPipeline extends Construct {
         super(parent, name);
 
         const pipeline = new codepipeline.Pipeline(this, "Pipeline", {
-            pipelineName: "reinvent-trivia-game-" + props.pipelineNameSuffix,
+            pipelineName: "nike-workshop-game-" + props.pipelineNameSuffix,
             restartExecutionOnUpdate: true,
         });
 
@@ -41,7 +41,7 @@ export class TriviaGameContainersCfnPipeline extends Construct {
                     targetType: 'SNS',
                     targetAddress: Stack.of(this).formatArn({
                         service: 'sns',
-                        resource: 'reinvent-trivia-notifications'
+                        resource: 'nike-workshop-notifications'
                     }),
                 }
             ]
@@ -56,13 +56,13 @@ export class TriviaGameContainersCfnPipeline extends Construct {
         const sourceOutput = new codepipeline.Artifact('SourceArtifact');
         const sourceAction = new actions.CodeStarConnectionsSourceAction({
             actionName: 'GitHubSource',
-            owner: 'aws-samples',
-            repo: 'aws-reinvent-trivia-game',
+            owner: 'dinesh-madhav',
+            repo: 'aws-nike-workshop-game',
             connectionArn: githubConnection,
             output: sourceOutput
         });
 
-        const baseImageRepo = ecr.Repository.fromRepositoryName(this, 'BaseRepo', 'reinvent-trivia-backend-base');
+        const baseImageRepo = ecr.Repository.fromRepositoryName(this, 'BaseRepo', 'nike-workshop-backend-base');
         const baseImageOutput = new codepipeline.Artifact('BaseImage');
         const dockerImageSourceAction = new actions.EcrSourceAction({
           actionName: 'BaseImage',

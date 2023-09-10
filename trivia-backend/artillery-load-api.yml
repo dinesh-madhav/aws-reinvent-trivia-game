@@ -1,5 +1,5 @@
 # Run with:
-# artillery run -t https://api-test.reinvent-trivia.com artillery-load-api.yml
+# artillery run -t https://api-test.nike-workshop.com artillery-load-api.yml
 
 config:
   http:

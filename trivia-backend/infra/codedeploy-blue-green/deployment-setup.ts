@@ -23,7 +23,7 @@ class TriviaDeploymentResourcesStack extends Stack {
     super(parent, name, props);
 
     // Lookup existing resources
-    const repo = ecr.Repository.fromRepositoryName(this, 'Repo', 'reinvent-trivia-backend');
+    const repo = ecr.Repository.fromRepositoryName(this, 'Repo', 'nike-workshop-backend');
     const ecsApplication = codedeploy.EcsApplication.fromEcsApplicationName(
       this,
       'App',
@@ -151,16 +151,16 @@ class TriviaDeploymentResourcesStack extends Stack {
 const app = new App();
 new TriviaDeploymentResourcesStack(app, 'TriviaDeploymentResourcesTest', {
   infrastructureStackName: 'TriviaBackendTest',
-  env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1' },
+  env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2' },
   tags: {
-      project: "reinvent-trivia"
+      project: "nike-workshop"
   }
 });
 new TriviaDeploymentResourcesStack(app, 'TriviaDeploymentResourcesProd', {
   infrastructureStackName: 'TriviaBackendProd',
-  env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1' },
+  env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2' },
   tags: {
-      project: "reinvent-trivia"
+      project: "nike-workshop"
   }
 });
 app.synth();

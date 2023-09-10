@@ -1,4 +1,4 @@
-FROM reinvent-trivia-backend-base:release
+FROM nike-workshop-backend-base:release
 
 ARG NODE_ENV=production
 ARG PORT=80

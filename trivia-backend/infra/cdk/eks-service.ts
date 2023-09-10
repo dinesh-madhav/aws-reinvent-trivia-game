@@ -11,7 +11,7 @@ import {
   aws_route53 as route53,
   aws_ssm as ssm,
 } from 'aws-cdk-lib';
-import {ReinventTriviaResource} from './eks/kubernetes-resources/reinvent-trivia';
+import {ReinventTriviaResource} from './eks/kubernetes-resources/nike-workshop';
 import {AlbIngressControllerPolicy} from './eks/alb-ingress-controller-policy';
 
 interface TriviaBackendStackProps extends StackProps {
@@ -31,11 +31,11 @@ class TriviaBackendStack extends Stack {
     const cluster = new eks.FargateCluster(this, 'FargateCluster', {
       clusterName: props.domainName.replace(/\./g, '-'),
       defaultProfile: {
-        fargateProfileName: 'reinvent-trivia',
+        fargateProfileName: 'nike-workshop',
         selectors: [
           {namespace: 'default'},
           {namespace: 'kube-system'},
-          {namespace: 'reinvent-trivia'},
+          {namespace: 'nike-workshop'},
         ],
         subnetSelection: {subnets: vpc.privateSubnets},
       },
@@ -48,10 +48,10 @@ class TriviaBackendStack extends Stack {
       vpc,
       version: eks.KubernetesVersion.V1_17,
     });
-    const fargateProfile = cluster.node.findChild('fargate-profile-reinvent-trivia');
+    const fargateProfile = cluster.node.findChild('fargate-profile-nike-workshop');
 
     // Configuration parameters
-    const imageRepo = ecr.Repository.fromRepositoryName(this, 'Repo', 'reinvent-trivia-backend');
+    const imageRepo = ecr.Repository.fromRepositoryName(this, 'Repo', 'nike-workshop-backend');
     const tag = (process.env.IMAGE_TAG) ? process.env.IMAGE_TAG : 'latest';
     const image = ecs.ContainerImage.fromEcrRepository(imageRepo, tag)
 
@@ -123,7 +123,7 @@ class TriviaBackendStack extends Stack {
               },
               scope: {
                 singleNamespace: true,
-                watchNamespace: 'reinvent-trivia',
+                watchNamespace: 'nike-workshop',
               },
             },
           });
@@ -136,7 +136,7 @@ class TriviaBackendStack extends Stack {
               kind: 'HorizontalPodAutoscaler',
               metadata: {
                 name: 'api',
-                namespace: 'reinvent-trivia',
+                namespace: 'nike-workshop',
               },
               spec: {
                 scaleTargetRef: {
@@ -195,7 +195,7 @@ class TriviaBackendStack extends Stack {
               namespace: 'kube-system',
               values: {
                 domainFilters: [props.domainZone],
-                namespace: 'reinvent-trivia',
+                namespace: 'nike-workshop',
                 provider: 'aws',
                 rbac: {
                   serviceAccountAnnotations: {
@@ -215,12 +215,12 @@ class TriviaBackendStack extends Stack {
 
 const app = new App();
 new TriviaBackendStack(app, 'TriviaBackendProd', {
-  domainName: 'api.reinvent-trivia.com',
+  domainName: 'api.nike-workshop.com',
   // NOTE: `domainZone` must already exist in Route 53.
-  domainZone: 'reinvent-trivia.com',
-  env: {account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1'},
+  domainZone: 'nike-workshop.com',
+  env: {account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2'},
   tags: {
-      project: "reinvent-trivia"
+      project: "nike-workshop"
   },
   /*
    * NOTE: `oidcProvider` will not be available until after the cluster is deployed for the first

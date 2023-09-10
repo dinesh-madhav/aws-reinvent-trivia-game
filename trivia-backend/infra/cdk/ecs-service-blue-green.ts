@@ -35,7 +35,7 @@ class TriviaBackendStack extends Stack {
     // Note that the image tag MUST be static in the generated CloudFormation template
     // (for example, the tag value cannot come from a CFN stack parameter), or else CodeDeploy
     // will not recognize when the tag changes and will not orchestrate any blue-green deployments.
-    const imageRepo = ecr.Repository.fromRepositoryName(this, 'Repo', 'reinvent-trivia-backend');
+    const imageRepo = ecr.Repository.fromRepositoryName(this, 'Repo', 'nike-workshop-backend');
     const tag = (process.env.IMAGE_TAG) ? process.env.IMAGE_TAG : 'latest';
     const image = ecs.ContainerImage.fromEcrRepository(imageRepo, tag)
 
@@ -343,21 +343,21 @@ class TriviaBackendStack extends Stack {
 
 const app = new App();
 new TriviaBackendStack(app, 'TriviaBackendTest', {
-  domainName: 'api-test.reinvent-trivia.com',
-  domainZone: 'reinvent-trivia.com',
+  domainName: 'api-test.nike-workshop.com',
+  domainZone: 'nike-workshop.com',
   deploymentHooksStack: 'TriviaBackendHooksTest',
-  env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1' },
+  env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2' },
   tags: {
-      project: 'reinvent-trivia'
+      project: 'nike-workshop'
   }
 });
 new TriviaBackendStack(app, 'TriviaBackendProd', {
-  domainName: 'api.reinvent-trivia.com',
-  domainZone: 'reinvent-trivia.com',
+  domainName: 'api.nike-workshop.com',
+  domainZone: 'nike-workshop.com',
   deploymentHooksStack: 'TriviaBackendHooksProd',
-  env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1' },
+  env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2' },
   tags: {
-      project: 'reinvent-trivia'
+      project: 'nike-workshop'
   }
 });
 app.synth();

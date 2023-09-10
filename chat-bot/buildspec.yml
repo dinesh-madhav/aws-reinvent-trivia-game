@@ -12,7 +12,7 @@ phases:
   build:
     commands:
       - aws cloudformation package --template-file template.yaml --s3-bucket $ARTIFACTS_BUCKET --output-template-file TriviaGameChatBotProd.template.yaml
-      - sed 's/api.reinvent-trivia.com/api-test.reinvent-trivia.com/g' TriviaGameChatBotProd.template.yaml > TriviaGameChatBotTest.template.yaml
+      - sed 's/api.nike-workshop.com/api-test.nike-workshop.com/g' TriviaGameChatBotProd.template.yaml > TriviaGameChatBotTest.template.yaml
       - cp StackConfig.json StackConfigTest.json
       - cp StackConfig.json StackConfigProd.json
 

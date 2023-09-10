@@ -36,7 +36,7 @@ export class ReinventTriviaResource extends eks.KubernetesManifest {
         "apiVersion": "v1",
         "kind": "Namespace",
         "metadata": {
-          "name": "reinvent-trivia"
+          "name": "nike-workshop"
         }
       },
       {
@@ -44,7 +44,7 @@ export class ReinventTriviaResource extends eks.KubernetesManifest {
         "kind": "Deployment",
         "metadata": {
           "name": "api",
-          "namespace": "reinvent-trivia"
+          "namespace": "nike-workshop"
         },
         "spec": {
           "replicas": 1,
@@ -100,7 +100,7 @@ export class ReinventTriviaResource extends eks.KubernetesManifest {
         "kind": "Service",
         "metadata": {
           "name": "api",
-          "namespace": "reinvent-trivia",
+          "namespace": "nike-workshop",
         },
         "spec": {
           "ports": [
@@ -121,7 +121,7 @@ export class ReinventTriviaResource extends eks.KubernetesManifest {
         "kind": "Ingress",
         "metadata": {
           "name": "api",
-          "namespace": "reinvent-trivia",
+          "namespace": "nike-workshop",
           "annotations": {
             "kubernetes.io/ingress.class": "alb",
             "alb.ingress.kubernetes.io/scheme": "internet-facing",

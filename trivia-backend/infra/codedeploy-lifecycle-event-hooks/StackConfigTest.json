@@ -1,8 +1,8 @@
 {
   "Tags" : {
-    "project" : "reinvent-trivia"
+    "project" : "nike-workshop"
   },
   "Parameters" : {
-    "TriviaBackendDomain": "api-test.reinvent-trivia.com"
+    "TriviaBackendDomain": "api-test.nike-workshop.com"
   }
 }

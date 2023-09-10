@@ -87,7 +87,7 @@ jobs:
     - name: Test
       run: |
         cd trivia-backend/base
-        docker build -t reinvent-trivia-backend-base:release .
+        docker build -t nike-workshop-backend-base:release .
 
         cd ..
-        docker build -t reinvent-trivia-backend:release .
+        docker build -t nike-workshop-backend:release .

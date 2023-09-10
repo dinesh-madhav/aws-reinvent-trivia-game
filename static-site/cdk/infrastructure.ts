@@ -36,26 +36,26 @@ class TriviaGameRootDomainStack extends Stack {
 
 const app = new App();
 new TriviaGameInfrastructureStack(app, 'TriviaGameStaticSiteInfraTest', {
-    domainName: 'reinvent-trivia.com',
+    domainName: 'nike-workshop.com',
     siteSubDomain: 'test',
-    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1' },
+    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2' },
     tags: {
-        project: "reinvent-trivia"
+        project: "nike-workshop"
     }
 });
 new TriviaGameInfrastructureStack(app, 'TriviaGameStaticSiteInfraProd', {
-    domainName: 'reinvent-trivia.com',
+    domainName: 'nike-workshop.com',
     siteSubDomain: 'www',
-    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1' },
+    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2' },
     tags: {
-        project: "reinvent-trivia"
+        project: "nike-workshop"
     }
 });
 new TriviaGameRootDomainStack(app, 'TriviaGameRootDomainRedirectProd', {
-    domainName: 'reinvent-trivia.com',
-    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1' },
+    domainName: 'nike-workshop.com',
+    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2' },
     tags: {
-        project: "reinvent-trivia"
+        project: "nike-workshop"
     }
 });
 app.synth();

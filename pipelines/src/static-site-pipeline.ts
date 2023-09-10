@@ -13,7 +13,7 @@ class TriviaGameStaticSitePipeline extends Stack {
         super(parent, name, props);
 
         const pipeline = new codepipeline.Pipeline(this, "Pipeline", {
-            pipelineName: "reinvent-trivia-game-static-site",
+            pipelineName: "nike-workshop-game-static-site",
             restartExecutionOnUpdate: true,
         });
 
@@ -27,7 +27,7 @@ class TriviaGameStaticSitePipeline extends Stack {
                     targetType: 'SNS',
                     targetAddress: Stack.of(this).formatArn({
                         service: 'sns',
-                        resource: 'reinvent-trivia-notifications'
+                        resource: 'nike-workshop-notifications'
                     }),
                 }
             ]
@@ -38,7 +38,7 @@ class TriviaGameStaticSitePipeline extends Stack {
         const sourceOutput = new codepipeline.Artifact('SourceArtifact');
         const sourceAction = new actions.CodeStarConnectionsSourceAction({
             actionName: 'GitHubSource',
-            owner: 'aws-samples',
+            owner: 'dinesh-madhav',
             repo: 'aws-reinvent-trivia-game',
             connectionArn: githubConnection,
             output: sourceOutput
@@ -146,9 +146,9 @@ class TriviaGameStaticSitePipeline extends Stack {
 
 const app = new App();
 new TriviaGameStaticSitePipeline(app, 'TriviaGameStaticSitePipeline', {
-    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1' },
+    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2' },
     tags: {
-        project: "reinvent-trivia"
+        project: "nike-workshop"
     }
 });
 app.synth();

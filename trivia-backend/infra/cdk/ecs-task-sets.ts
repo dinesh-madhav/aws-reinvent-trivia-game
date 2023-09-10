@@ -13,7 +13,7 @@ class TriviaBackendStack extends Stack {
     super(parent, name, props);
 
     // Configuration parameters
-    const imageRepo = ecr.Repository.fromRepositoryName(this, 'Repo', 'reinvent-trivia-backend');
+    const imageRepo = ecr.Repository.fromRepositoryName(this, 'Repo', 'nike-workshop-backend');
     const tag = (process.env.IMAGE_TAG) ? process.env.IMAGE_TAG : 'latest';
     const image = ecs.ContainerImage.fromEcrRepository(imageRepo, tag)
 
@@ -112,6 +112,6 @@ class TriviaBackendStack extends Stack {
 
 const app = new App();
 new TriviaBackendStack(app, 'TriviaBackendTaskSets', {
-  env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1' }
+  env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2' }
 });
 app.synth();

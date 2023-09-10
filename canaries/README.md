@@ -6,12 +6,12 @@ The trivia game application can use Amazon CloudWatch Synthetics to continuously
 
 Create an SNS topic for notifications about the canary alarms.  An email address or to a [chat bot](https://docs.aws.amazon.com/chatbot/latest/adminguide/setting-up.html) can then be subscribed to the topic to receive notifications about canary alarms.
 ```
-aws sns create-topic --name reinvent-trivia-notifications --region us-east-1
+aws sns create-topic --name nike-workshop-notifications --region us-west-2
 ```
 
 ## Customize
 
-Replace all references to 'reinvent-trivia.com' with your own domain name.
+Replace all references to 'nike-workshop.com' with your own domain name.
 
 ## Deploy
 
@@ -38,12 +38,12 @@ Deploy the resources for running a continuous monitoring canary against the test
 
 ```
 aws cloudformation deploy \
-  --region us-east-1 \
+  --region us-west-2 \
   --template-file template.yaml \
   --stack-name TriviaGameCanariesTest \
   --capabilities CAPABILITY_NAMED_IAM \
-  --parameter-overrides Stage=test SourceBucket=$BUCKET_NAME SourceObjectKey="trivia-game-canary-code.zip" WebpageUrl="https://test.reinvent-trivia.com" ApiEndpoint="https://api-test.reinvent-trivia.com/" \
-  --tags project=reinvent-trivia
+  --parameter-overrides Stage=test SourceBucket=$BUCKET_NAME SourceObjectKey="trivia-game-canary-code.zip" WebpageUrl="https://test.nike-workshop.com" ApiEndpoint="https://api-test.nike-workshop.com/" \
+  --tags project=nike-workshop
 ```
 
 ### Create the production endpoint canary
@@ -52,10 +52,10 @@ Deploy the resources for running a continuous monitoring canary against the prod
 
 ```
 aws cloudformation deploy \
-  --region us-east-1 \
+  --region us-west-2 \
   --template-file template.yaml \
   --stack-name TriviaGameCanariesProd \
   --capabilities CAPABILITY_NAMED_IAM \
-  --parameter-overrides Stage=prod SourceBucket=$BUCKET_NAME SourceObjectKey="trivia-game-canary-code.zip" WebpageUrl="https://www.reinvent-trivia.com" ApiEndpoint="https://api.reinvent-trivia.com/" \
-  --tags project=reinvent-trivia
+  --parameter-overrides Stage=prod SourceBucket=$BUCKET_NAME SourceObjectKey="trivia-game-canary-code.zip" WebpageUrl="https://www.nike-workshop.com" ApiEndpoint="https://api.nike-workshop.com/" \
+  --tags project=nike-workshop
 ```

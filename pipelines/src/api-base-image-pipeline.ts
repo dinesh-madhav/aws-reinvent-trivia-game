@@ -17,7 +17,7 @@ class TriviaGameBackendBaseImagePipeline extends Stack {
         super(parent, name, props);
 
         const pipeline = new codepipeline.Pipeline(this, 'Pipeline', {
-            pipelineName: 'reinvent-trivia-game-base-image',
+            pipelineName: 'nike-workshop-game-base-image',
             restartExecutionOnUpdate: true,
         });
 
@@ -31,7 +31,7 @@ class TriviaGameBackendBaseImagePipeline extends Stack {
                     targetType: 'SNS',
                     targetAddress: Stack.of(this).formatArn({
                         service: 'sns',
-                        resource: 'reinvent-trivia-notifications'
+                        resource: 'nike-workshop-notifications'
                     }),
                 }
             ]
@@ -42,8 +42,8 @@ class TriviaGameBackendBaseImagePipeline extends Stack {
         const sourceOutput = new codepipeline.Artifact('SourceArtifact');
         const sourceAction = new actions.CodeStarConnectionsSourceAction({
             actionName: 'GitHubSource',
-            owner: 'aws-samples',
-            repo: 'aws-reinvent-trivia-game',
+            owner: 'dinesh-madhav',
+            repo: 'aws-nike-workshop-game',
             connectionArn: githubConnection,
             output: sourceOutput
         });
@@ -148,9 +148,9 @@ class TriviaGameBackendBaseImagePipeline extends Stack {
 
 const app = new App();
 new TriviaGameBackendBaseImagePipeline(app, 'TriviaGameBackendBaseImagePipeline', {
-    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1' },
+    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2' },
     tags: {
-        project: "reinvent-trivia"
+        project: "nike-workshop"
     }
 });
 app.synth();

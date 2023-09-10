@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    IMAGE_REPO_NAME: reinvent-trivia-backend-base
+    IMAGE_REPO_NAME: nike-workshop-backend-base
     IMAGE_TAG: release
 
 phases:

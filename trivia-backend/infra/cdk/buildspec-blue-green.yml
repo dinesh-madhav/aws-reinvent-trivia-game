@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    IMAGE_REPO_NAME: reinvent-trivia-backend
+    IMAGE_REPO_NAME: nike-workshop-backend
 
 phases:
   install:
@@ -25,7 +25,7 @@ phases:
 
       # Consume base image
       - export BASE_IMAGE=`jq -r '.ImageURI' <$CODEBUILD_SRC_DIR_BaseImage/imageDetail.json`
-      - sed -i "s|reinvent-trivia-backend-base:release|$BASE_IMAGE|g" Dockerfile
+      - sed -i "s|nike-workshop-backend-base:release|$BASE_IMAGE|g" Dockerfile
 
   build:
     commands:

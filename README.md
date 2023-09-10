@@ -1,6 +1,6 @@
 ## AWS re:Invent Trivia Game
 
-Sample trivia game built with AWS Fargate, AWS Lambda, and Amazon Lex.  See [reinvent-trivia.com](https://www.reinvent-trivia.com) for a running example.
+Sample trivia game built with AWS Fargate, AWS Lambda, and Amazon Lex.  See [nike-workshop.com](https://www.nike-workshop.com) for a running example.
 
 ## Components
 

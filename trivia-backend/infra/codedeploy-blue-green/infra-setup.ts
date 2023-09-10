@@ -238,19 +238,19 @@ class TriviaBackendStack extends Stack {
 
 const app = new App();
 new TriviaBackendStack(app, 'TriviaBackendTest', {
-  domainName: 'api-test.reinvent-trivia.com',
-  domainZone: 'reinvent-trivia.com',
-  env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1' },
+  domainName: 'api-test.nike-workshop.com',
+  domainZone: 'nike-workshop.com',
+  env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2' },
   tags: {
-      project: "reinvent-trivia"
+      project: "nike-workshop"
   }
 });
 new TriviaBackendStack(app, 'TriviaBackendProd', {
-  domainName: 'api.reinvent-trivia.com',
-  domainZone: 'reinvent-trivia.com',
-  env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1' },
+  domainName: 'api.nike-workshop.com',
+  domainZone: 'nike-workshop.com',
+  env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2' },
   tags: {
-      project: "reinvent-trivia"
+      project: "nike-workshop"
   }
 });
 app.synth();

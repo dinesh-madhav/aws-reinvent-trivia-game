@@ -8,7 +8,7 @@ class TriviaGamePipelinesBootstrap extends Stack {
 
         // Create resources used by all the trivia game pipelines
         const codeStarConnection = new connections.CfnConnection(this, 'GitHubConnection', {
-            connectionName: 'reinvent-trivia-repo',
+            connectionName: 'nike-workshop-repo',
             providerType: 'GitHub',
         });
 
@@ -21,9 +21,9 @@ class TriviaGamePipelinesBootstrap extends Stack {
 
 const app = new App();
 new TriviaGamePipelinesBootstrap(app, 'TriviaGamePipelines', {
-    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-east-1' },
+    env: { account: process.env['CDK_DEFAULT_ACCOUNT'], region: 'us-west-2' },
     tags: {
-        project: 'reinvent-trivia'
+        project: 'nike-workshop'
     }
 });
 app.synth();
