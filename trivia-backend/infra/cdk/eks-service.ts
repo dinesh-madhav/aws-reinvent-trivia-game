@@ -11,7 +11,7 @@ import {
   aws_route53 as route53,
   aws_ssm as ssm,
 } from 'aws-cdk-lib';
-import {ReinventTriviaResource} from './eks/kubernetes-resources/nike-workshop';
+import {ReinventTriviaResource} from './eks/kubernetes-resources/reinvent-trivia';
 import {AlbIngressControllerPolicy} from './eks/alb-ingress-controller-policy';
 
 interface TriviaBackendStackProps extends StackProps {
