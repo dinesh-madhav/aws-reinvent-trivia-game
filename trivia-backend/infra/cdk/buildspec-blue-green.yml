@@ -22,12 +22,12 @@ phases:
       - export IMAGE_TAG=build-`echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}'`
       - AWS_ACCOUNT_ID=`echo $CODEBUILD_BUILD_ARN | awk -F":" '{print $5}'`
       - ECR_REPO=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
-      - docker login -u AWS --password-stdin 339263341917.dkr.ecr.us-east-1.amazonaws.com < <(aws ecr get-login-password --region us-east-1)
-
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 339263341917.dkr.ecr.us-east-1.amazonaws.com
 
       # Consume base image
       - export BASE_IMAGE=`jq -r '.ImageURI' <$CODEBUILD_SRC_DIR_BaseImage/imageDetail.json`
-      - echo "BASE_IMAGE is set to :$BASE_IMAGE"
+      - echo "BASE_IMAGE is set to :$BASE_IMAGE'
+      - sed -i "s|nike-workshop-backend-base:release|$BASE_IMAGE|g" Dockerfile
 
   build:
     commands:
