@@ -1,4 +1,4 @@
-FROM nike-workshop-backend-base:release
+FROM FROM 339263341917.dkr.ecr.us-east-1.amazonaws.com/nike-workshop-backend-base:release@sha256:33a08e201cf2df63032d6976d247a05cb3fce4895e04ac4a60f3a5403200808f
 
 ARG NODE_ENV=production
 ARG PORT=80
