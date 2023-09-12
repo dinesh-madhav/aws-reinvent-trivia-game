@@ -225,7 +225,7 @@ class TriviaBackendStack extends Stack {
       },
       additionalOptions: {
         // After canary period, shift 100% of prod traffic, then wait 30 minutes
-        terminationWaitTimeInMinutes: 30
+        terminationWaitTimeInMinutes: 2
       },
       lifecycleEventHooks: {
         // invoke lifecycle event hook function after test traffic is live, but before prod traffic is live

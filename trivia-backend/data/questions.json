@@ -43,32 +43,31 @@
         "id": 5,
         "points": 100,
         "question": "What significant endorsement deal helped establish Nike as a major player in the sports industry?",
-        "answer": "How to re:Invent",
+        "answer": "Nike signed an endorsement deal with basketball star Michael Jordan in 1984, leading to the creation of the Air Jordan brand.",
         "answerType": "STRING",
         "alternativeAnswers": [
-          "how to reinvent"
         ]
       },
       {
         "id": 6,
         "points": 200,
-        "question": "How many venues does the re:Invent campus span this year (2019)?",
-        "answer": 6,
-        "answerType": "NUMBER"
+        "question": "What was the first Air Jordan sneaker, and when was it released?",
+        "answer": "The first Air Jordan sneaker, the Air Jordan 1, was released in 1985.",
+        "answerType": "STRING"
       },
       {
         "id": 7,
         "points": 300,
-        "question": "What year did twitch.tv/aws start streaming at re:Invent?",
-        "answer": 2016,
-        "answerType": "NUMBER"
+        "question": "How has Nike's sustainability initiatives evolved over the years?",
+        "answer": "They introduced the 'Reuse-A-Shoe' program in the early 1990s, which recycles old athletic shoes into material for sports surfaces.",
+        "answerType": "STRING"
       },
       {
         "id": 8,
         "points": 400,
-        "question": "How many chalk talks are scheduled for re:Invent 2019 (as of Nov 17)?",
-        "answer": 694,
-        "answerType": "NUMBER"
+        "question": "What was the Air Jordan line, and who was it named after?",
+        "answer": "The Air Jordan line is a highly popular and enduring series of basketball sneakers produced by Nike. It was named after and endorsed by the legendary basketball player Michael Jordan.",
+        "answerType": "STRING"
       }
     ]
   },
@@ -78,53 +77,37 @@
       {
         "id": 9,
         "points": 100,
-        "question": "What genre of music is usually played at the re:Play party?",
-        "answer": "EDM",
+        "question": "What is the story behind the iconic Air Force 1 sneaker?",
+        "answer": "The Air Force 1, introduced in 1982, was the first basketball shoe to feature Nike Air technology. It was named after the U.S. presidential aircraft, Air Force One.",
         "answerType": "STRING",
         "alternativeAnswers": [
-          "electronica",
-          "DJ",
-          "electronic dance music",
-          "electronic music",
-          "house music",
-          "house"
         ]
       },
       {
         "id": 10,
         "points": 200,
-        "question": "What kind of musical group kicks off Midnight Madness?",
-        "answer": "Marching Band",
+        "question": "When did Nike launch its sustainable initiative, 'Move to Zero'?",
+        "answer": "Nike launched its 'Move to Zero' initiative in 2020, which focuses on reducing the environmental impact of its products and achieving zero carbon and waste.",
         "answerType": "STRING",
         "alternativeAnswers": [
-          "marching bands"
         ]
       },
       {
         "id": 11,
         "points": 300,
-        "question": "What venue hosted the re:Play party in 2017?",
-        "answer": "The Linq",
+        "question": "What is the significance of the 'NikeTown' stores?",
+        "answer": "NikeTown stores, first opened in 1990",
         "answerType": "STRING",
         "alternativeAnswers": [
-          "the link",
-          "linq",
-          "link"
         ]
       },
       {
         "id": 12,
         "points": 400,
-        "question": "Who was the re:Play DJ at the 2013 re:Invent?",
-        "answer": "DeadMau5",
+        "question": "When did Nike enter the soccer (football) market?",
+        "answer": "Nike entered the soccer market in 1994",
         "answerType": "STRING",
         "alternativeAnswers": [
-          "deadmau5",
-          "Joel Thomas Zimmerman",
-          "Joel Zimmerman",
-          "dead mouse",
-          "deadmouse",
-          "deadmous"
         ]
       }
     ]
@@ -135,8 +118,8 @@
       {
         "id": 13,
         "points": 100,
-        "question": "Who delivers the Thursday morning re:Invent keynote?",
-        "answer": "Werner Vogels",
+        "question": "When did Nike enter the soccer (football) market?",
+        "answer": "Nike entered the soccer market in 1994",
         "answerType": "STRING",
         "alternativeAnswers": [
           "Werner"
@@ -145,8 +128,8 @@
       {
         "id": 14,
         "points": 200,
-        "question": "What sports star made a surprise experience at Midnight Madness in 2017?",
-        "answer": "Shaq",
+        "question": "When did Nike enter the soccer (football) market?",
+        "answer": "Nike entered the soccer market in 1994",
         "answerType": "STRING",
         "alternativeAnswers": [
           "Shaquille O'Neal",
@@ -159,8 +142,8 @@
       {
         "id": 15,
         "points": 300,
-        "question": "What restaurant is located in both the Venetian and the Palazzo?",
-        "answer": "Grand Lux Cafe",
+        "question": "When did Nike enter the soccer (football) market?",
+        "answer": "Nike entered the soccer market in 1994",
         "answerType": "STRING",
         "alternativeAnswers": [
         ]
@@ -168,8 +151,8 @@
       {
         "id": 16,
         "points": 400,
-        "question": "What AWS speaker keynoted \"Tuesday Night Live\" in 2016?",
-        "answer": "James Hamilton",
+        "question": "When did Nike enter the soccer (football) market?",
+        "answer": "Nike entered the soccer market in 1994",
         "answerType": "STRING",
         "alternativeAnswers": [
         ]
