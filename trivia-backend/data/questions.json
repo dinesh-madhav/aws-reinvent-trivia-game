@@ -5,15 +5,15 @@
       {
         "id": 1,
         "points": 100,
-        "question": "What year was the first AWS re:Invent held?",
-        "answer": 2012,
-        "answerType": "NUMBER"
+        "question": "Who co-founded Nike and when was the company established?",
+        "answer": "Bill Bowerman and Phil Knight in January 1964 under the name Blue Ribbon Sports",
+        "answerType": "STRING"
       },
       {
         "id": 2,
         "points": 200,
-        "question": "What Amazon-favorite sport was introduced to re:Invent attendees in 2016?",
-        "answer": "Broomball",
+        "question": "What was the inspiration behind the name 'Nike'?",
+        "answer": "Nike is derived from the Greek winged goddess of victory, representing speed, strength, and victory in sports.",
         "answerType": "STRING",
         "alternativeAnswers": [
         ]
@@ -21,28 +21,18 @@
       {
         "id": 3,
         "points": 300,
-        "question": "What world record was set at the 2017 re:Invent Tatonka Challenge?",
-        "answer": "Largest chicken wing eating contest: 214 people",
+        "question": "What was Nike's first product, and how did it perform?",
+        "answer": "Nike's first product was the 'Nike Cortez' running shoe, which was introduced in 1972.",
         "answerType": "STRING",
         "alternativeAnswers": [
-          "wing eating contest",
-          "largest wing eating contest",
-          "biggest wing eating contest",
-          "largest chicken wing eating contest",
-          "biggest chicken wing eating contest",
-          "wing eating competition",
-          "largest wing eating competition",
-          "biggest wing eating competition",
-          "largest chicken wing eating competition",
-          "biggest chicken wing eating competition"
         ]
       },
       {
         "id": 4,
         "points": 400,
-        "question": "What year were both Lambda and ECS (Elastic Container Service) announced at re:Invent?",
-        "answer": 2014,
-        "answerType": "NUMBER"
+        "question": "What was the significance of the 1996 Olympics for Nike?",
+        "answer": "The 1996 Summer Olympics in Atlanta were significant for Nike because they sponsored the U.S. Olympic team.",
+        "answerType": "STRING"
       }
     ]
   },
@@ -52,7 +42,7 @@
       {
         "id": 5,
         "points": 100,
-        "question": "What webinar helps people learn about re:Invent leading up to the big event?",
+        "question": "What significant endorsement deal helped establish Nike as a major player in the sports industry?",
         "answer": "How to re:Invent",
         "answerType": "STRING",
         "alternativeAnswers": [
