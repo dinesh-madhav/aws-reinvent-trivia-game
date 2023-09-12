@@ -220,7 +220,7 @@ class TriviaBackendStack extends Stack {
         timeBasedCanary: {
           // Shift 20% of prod traffic, then wait 15 minutes
           stepPercentage: 20,
-          bakeTimeMins: 15
+          bakeTimeMins: 2
         }
       },
       additionalOptions: {
